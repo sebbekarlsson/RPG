@@ -12,6 +12,8 @@ public class Scene {
 	private static List<Instance> instances = new ArrayList<Instance>();
 	
 	
+	protected Camera camera = new Camera();
+	
 	public Scene(int WIDTH, int HEIGHT){
 		this.WIDTH = WIDTH;
 		this.HEIGHT = HEIGHT;
