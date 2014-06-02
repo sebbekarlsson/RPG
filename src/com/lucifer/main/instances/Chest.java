@@ -13,7 +13,7 @@ import com.lucifer.main.scenes.WorldScene;
 public class Chest extends Instance {
 
 	boolean open = false;
-	Inventory inventory = new Inventory();
+	Inventory inventory = new Inventory(12);
 
 	public Chest(int x, int y) {
 		super(x, y);
@@ -57,9 +57,9 @@ public class Chest extends Instance {
 		open = true;
 		this.setSprite("images/chest/chest_open.png");
 		for(int i = 0; i < inventory.getInstances().size(); i++){
-			ItemBubble bubble = new ItemBubble(x,y);
+			ItemBubble bubble = new ItemBubble(x,y,inventory.getInstances().get(i));
 			
-			bubble.setItem(inventory.getInstances().get(i));
+			
 			bubble.x = x+MathBrain.chooseInt(MathBrain.random.nextInt(32),-MathBrain.random.nextInt(32));
 			bubble.y = y+MathBrain.chooseInt(MathBrain.random.nextInt(32),-MathBrain.random.nextInt(32));
 			

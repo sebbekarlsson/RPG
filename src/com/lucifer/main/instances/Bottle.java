@@ -11,12 +11,17 @@ public class Bottle extends Instance{
 		this.type = type;
 		if(type == 0){
 			this.setSprite("images/bottles/bottle.png");
+			this.setDisplayName("Empty Bottle");
 		}else if(type == 1){
 			this.setSprite("images/bottles/bottle_health.png");
+			this.setDisplayName("Health Bottle");
 		}
 		else if(type == 2){
 			this.setSprite("images/bottles/bottle_speed.png");
+			this.setDisplayName("Speed Bottle");
 		}
+		
+		
 	}
 
 }

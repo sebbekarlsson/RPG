@@ -21,6 +21,7 @@ public class Scene {
 	
 	public void tick(){}
 	public void draw(Graphics g){}
+	public void drawGUI(Graphics g){}
 	
 	public List<Instance> getInstances(){
 		return instances;

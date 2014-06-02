@@ -28,6 +28,7 @@ public class Game extends JFrame implements Runnable, KeyListener, MouseListener
 	private static BufferedImage offscreen = new BufferedImage(RENDERSIZE.width, RENDERSIZE.height, BufferedImage.TYPE_INT_RGB);
 
 	private Thread gameLoop = new Thread(this,"Game Loop");
+	public static double fps;
 
 	public static List<Scene> scenes = new ArrayList<Scene>();
 	public static int sceneIndex = 0;
@@ -37,6 +38,9 @@ public class Game extends JFrame implements Runnable, KeyListener, MouseListener
 	public static boolean vk_left = false;
 	public static boolean vk_right = false;
 	public static boolean vk_enter = false;
+	public static boolean vk_q = false;
+	public static boolean vk_e = false;
+	public static boolean vk_d = false;
 
 
 	public Game(){
@@ -61,13 +65,39 @@ public class Game extends JFrame implements Runnable, KeyListener, MouseListener
 		gameLoop.start();
 	}
 
+	public void tick(){
+		if(scenes.size() > 0){
+			for(int i = 0; i < getCurrentScene().getInstances().size(); i++){
+				Instance instance = getCurrentScene().getInstances().get(i);
+
+				instance.tick();
+
+
+			}
+
+			getCurrentScene().tick();
+			
+		}
+	}
+
 	public void run() {
+		 long lastTime;
+		 
 		while(true){
+			lastTime = System.nanoTime();
+			
+			
+			tick();
 
-
-
+			fps = 1000000000.0 / (System.nanoTime() - lastTime); 
+            lastTime = System.nanoTime();
+			
+            
+            
+           
+            
 			try {
-				Thread.sleep(1000/60);
+				Thread.sleep((long) fps/100);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -85,19 +115,21 @@ public class Game extends JFrame implements Runnable, KeyListener, MouseListener
 			for(int i = 0; i < getCurrentScene().getInstances().size(); i++){
 				Instance instance = getCurrentScene().getInstances().get(i);
 
-				instance.tick();
+
 
 				if(!instance.isOutSideView()){
 					instance.draw(g2);
 				}
 			}
 
-			getCurrentScene().tick();
+
 			getCurrentScene().draw(g2);
 		}
 
 		g2.translate(-getCurrentScene().camera.x, -getCurrentScene().camera.y);
+		getCurrentScene().drawGUI(g2);
 		g.drawImage(offscreen.getScaledInstance(FRAMESIZE.width, FRAMESIZE.height, 1), 0, 0, this);
+		
 	}
 
 
@@ -153,9 +185,21 @@ public class Game extends JFrame implements Runnable, KeyListener, MouseListener
 		if(e.getKeyCode() == KeyEvent.VK_RIGHT){
 			vk_right = true;
 		}
-		
+
 		if(e.getKeyCode() == KeyEvent.VK_ENTER){
 			vk_enter = true;
+		}
+		
+		if(e.getKeyCode() == KeyEvent.VK_Q){
+			vk_q = true;
+		}
+		
+		if(e.getKeyCode() == KeyEvent.VK_E){
+			vk_e = true;
+		}
+		
+		if(e.getKeyCode() == KeyEvent.VK_D){
+			vk_d = true;
 		}
 
 	}
@@ -177,9 +221,21 @@ public class Game extends JFrame implements Runnable, KeyListener, MouseListener
 		if(e.getKeyCode() == KeyEvent.VK_RIGHT){
 			vk_right = false;
 		}
-		
+
 		if(e.getKeyCode() == KeyEvent.VK_ENTER){
 			vk_enter = false;
+		}
+		
+		if(e.getKeyCode() == KeyEvent.VK_Q){
+			vk_q = false;
+		}
+		
+		if(e.getKeyCode() == KeyEvent.VK_E){
+			vk_e = false;
+		}
+		
+		if(e.getKeyCode() == KeyEvent.VK_D){
+			vk_d = false;
 		}
 
 

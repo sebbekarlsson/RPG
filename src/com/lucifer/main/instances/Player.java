@@ -2,11 +2,14 @@ package com.lucifer.main.instances;
 
 import com.lucifer.main.Game;
 import com.lucifer.main.Instance;
+import com.lucifer.main.Inventory;
+import com.lucifer.main.scenes.WorldScene;
 
 public class Player extends Instance {
 
 	int speed = 2;
 	boolean collides = false;
+	Inventory inventory = new Inventory(8);
 
 	public Player(int x, int y) {
 		super(x, y);
@@ -27,6 +30,23 @@ public class Player extends Instance {
 				
 
 			}
+			
+			
+			if(Game.vk_d && inventory.getInstances().size() > 0){
+				
+				
+				Instance item = inventory.getInstances().get(WorldScene.markerX/16);
+				item.x = x;
+				item.y = y;
+				ItemBubble bubble = new ItemBubble(x,y,item);
+				Game.getCurrentScene().instantiate(bubble);
+				
+				inventory.getInstances().remove(WorldScene.markerX/16);
+				Game.vk_d = false;
+				
+				
+			}
+			
 		}
 
 
@@ -52,6 +72,10 @@ public class Player extends Instance {
 		}
 
 
+	}
+	
+	public Inventory getInventory(){
+		return this.inventory;
 	}
 
 }

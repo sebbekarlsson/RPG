@@ -14,6 +14,7 @@ public class Instance {
 
 	public int x,y;
 	public Image sprite;
+	private String displayName;
 	Rectangle hitbox = new Rectangle();
 
 	public Instance(int x, int y){
@@ -63,6 +64,14 @@ public class Instance {
 
 	public void setHitBoxSize(Dimension d){
 		this.hitbox.setSize(d);
+	}
+	
+	public void setDisplayName(String name){
+		this.displayName = name;
+	}
+	
+	public String getDisplayName(){
+		return this.displayName;
 	}
 
 }
