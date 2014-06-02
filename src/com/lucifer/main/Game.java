@@ -23,7 +23,7 @@ public class Game extends JFrame implements Runnable, KeyListener, MouseListener
 	private static int SCALE = 2;
 
 	public static Dimension FRAMESIZE = new Dimension(WIDTH * SCALE, HEIGHT * SCALE);
-	public static Dimension RENDERSIZE = new Dimension(FRAMESIZE.width / 2, FRAMESIZE.height / 2);
+	public static Dimension RENDERSIZE = new Dimension(FRAMESIZE.width / 3, FRAMESIZE.height / 3);
 
 	private static BufferedImage offscreen = new BufferedImage(RENDERSIZE.width, RENDERSIZE.height, BufferedImage.TYPE_INT_RGB);
 
@@ -36,6 +36,7 @@ public class Game extends JFrame implements Runnable, KeyListener, MouseListener
 	public static boolean vk_down = false;
 	public static boolean vk_left = false;
 	public static boolean vk_right = false;
+	public static boolean vk_enter = false;
 
 
 	public Game(){
@@ -152,6 +153,10 @@ public class Game extends JFrame implements Runnable, KeyListener, MouseListener
 		if(e.getKeyCode() == KeyEvent.VK_RIGHT){
 			vk_right = true;
 		}
+		
+		if(e.getKeyCode() == KeyEvent.VK_ENTER){
+			vk_enter = true;
+		}
 
 	}
 
@@ -171,6 +176,10 @@ public class Game extends JFrame implements Runnable, KeyListener, MouseListener
 
 		if(e.getKeyCode() == KeyEvent.VK_RIGHT){
 			vk_right = false;
+		}
+		
+		if(e.getKeyCode() == KeyEvent.VK_ENTER){
+			vk_enter = false;
 		}
 
 

@@ -1,8 +1,8 @@
 package com.lucifer.main.instances;
 
-import com.lucifer.main.Instance;
 
-public class Tree extends Instance{
+
+public class Tree extends Obstacle{
 
 	public Tree(int x, int y) {
 		super(x, y);

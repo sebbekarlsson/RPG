@@ -19,25 +19,11 @@ public class Player extends Instance {
 
 		for(int i = 0; i < Game.getCurrentScene().getInstances().size(); i++){
 			Instance instance = Game.getCurrentScene().getInstances().get(i);
-			if(instance instanceof Tree){
+			if(instance instanceof Obstacle){
 
 
 
-				if(x >= instance.x && x <= instance.x+1 && y >= instance.y && y <= instance.y+instance.sprite.getHeight(null)){
-					x-= speed;
-				}
 				
-				if(x >= instance.x+instance.sprite.getWidth(null)/2 && x <= instance.x+(instance.sprite.getWidth(null)/2) && y >= instance.y && y <= instance.y+instance.sprite.getHeight(null)){
-					x+= speed;
-				}
-				
-				if(x >= instance.x && x <= instance.x+instance.sprite.getWidth(null) && y >= instance.y-(instance.sprite.getHeight(null)/2) && y <= instance.y+(instance.sprite.getHeight(null)/2)){
-					y-= speed;
-				}
-				
-				if(x >= instance.x && x <= instance.x+instance.sprite.getWidth(null) && y >= instance.y+(instance.sprite.getHeight(null)/2) && y <= instance.y+(instance.sprite.getHeight(null)/2)){
-					y-= speed;
-				}
 				
 
 			}
