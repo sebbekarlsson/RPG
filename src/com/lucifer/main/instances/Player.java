@@ -8,6 +8,7 @@ import com.lucifer.main.scenes.WorldScene;
 public class Player extends Instance {
 
 	int speed = 2;
+	public int health = 100;
 	boolean collides = false;
 	Inventory inventory = new Inventory(8);
 
@@ -32,7 +33,7 @@ public class Player extends Instance {
 			}
 			
 			
-			if(Game.vk_d && inventory.getInstances().size() > 0){
+			if(Game.vk_d && inventory.getInstances().size() > 0 && WorldScene.markerX/16 < inventory.getInstances().size()){
 				
 				
 				Instance item = inventory.getInstances().get(WorldScene.markerX/16);

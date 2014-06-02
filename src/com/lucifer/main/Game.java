@@ -125,10 +125,14 @@ public class Game extends JFrame implements Runnable, KeyListener, MouseListener
 
 			getCurrentScene().draw(g2);
 		}
-
+		
 		g2.translate(-getCurrentScene().camera.x, -getCurrentScene().camera.y);
+		
+		
 		getCurrentScene().drawGUI(g2);
+		
 		g.drawImage(offscreen.getScaledInstance(FRAMESIZE.width, FRAMESIZE.height, 1), 0, 0, this);
+		g2.dispose();
 		
 	}
 

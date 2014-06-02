@@ -20,6 +20,10 @@ public class Bottle extends Instance{
 			this.setSprite("images/bottles/bottle_speed.png");
 			this.setDisplayName("Speed Bottle");
 		}
+		else if(type == 3){
+			this.setSprite("images/bottles/bottle_poison.png");
+			this.setDisplayName("Poison Bottle");
+		}
 		
 		
 	}

@@ -6,6 +6,7 @@ import java.awt.Graphics;
 
 import com.lucifer.main.Game;
 import com.lucifer.main.ImageLoader;
+import com.lucifer.main.Instance;
 import com.lucifer.main.MathBrain;
 import com.lucifer.main.Scene;
 import com.lucifer.main.instances.Bottle;
@@ -43,24 +44,23 @@ public class WorldScene extends Scene {
 					this.instantiate(new Flower(i*32,ii*32));
 				}
 
+				
+				Instance[] chestItems = new Instance[]{
+						new Bottle(0,0,0),
+						new Bottle(0,0,1),
+						new Bottle(0,0,2),
+						new Bottle(0,0,3),
+						new Flower(0,0),
+						new Mushroom(0,0)
+				};
+				
 				Chest chest = new Chest(i*32,ii*32);
 
-				chest.getInventory().add(new Flower(0,0));
-				chest.getInventory().add(new Flower(0,0));
-				chest.getInventory().add(new Flower(0,0));
-				chest.getInventory().add(new Bottle(0,0,0));
-				chest.getInventory().add(new Bottle(0,0,1));
-				chest.getInventory().add(new Mushroom(0,0));
-				chest.getInventory().add(new Mushroom(0,0));
-				chest.getInventory().add(new Mushroom(0,0));
-				chest.getInventory().add(new Mushroom(0,0));
-				chest.getInventory().add(new Bottle(0,0,0));
-				chest.getInventory().add(new Bottle(0,0,1));
-				chest.getInventory().add(new Bottle(0,0,1));
-				chest.getInventory().add(new Bottle(0,0,0));
+				
+				for(int it = 0; it < MathBrain.random.nextInt(20)+1; it++){
+				chest.getInventory().add(chestItems[MathBrain.random.nextInt(chestItems.length)]);
 
-
-
+				}
 
 
 
@@ -107,6 +107,10 @@ public class WorldScene extends Scene {
 			g.drawImage(ImageLoader.load("images/inventory/slot.png"), 1+16*i, Game.RENDERSIZE.height-17, null);
 
 		}
+		
+		for(int i = 0; i < player.health/10; i++){
+			g.drawImage(ImageLoader.load("images/heart.png"), 2+17*i, 9, null);
+		}
 		if(player.getInventory().getInstances().size() > 0){
 			for(int i = 0; i < player.getInventory().getInstances().size(); i++){
 
@@ -124,6 +128,7 @@ public class WorldScene extends Scene {
 		}
 		g.setColor(Color.BLUE);
 		g.drawRect(markerX, Game.RENDERSIZE.height-17, 16, 16);
+		g.drawImage(ImageLoader.load("images/inventory/marker.png"), markerX, Game.RENDERSIZE.height-17, null);
 
 
 	}
