@@ -1,5 +1,6 @@
 package com.lucifer.main;
 
+
 public class Camera {
 	
 	public int x;
