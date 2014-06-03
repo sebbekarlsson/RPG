@@ -107,6 +107,8 @@ public class Game extends JFrame implements Runnable, KeyListener, MouseListener
 
 	public void paint(Graphics g){
 		Graphics g2 = offscreen.getGraphics();
+		Graphics gui = offscreen.getGraphics();
+		gui.clearRect(0, 0, RENDERSIZE.width, RENDERSIZE.height);
 		g2.clearRect(0, 0, RENDERSIZE.width, RENDERSIZE.height);
 
 		g2.translate(getCurrentScene().camera.x, getCurrentScene().camera.y);
@@ -129,7 +131,7 @@ public class Game extends JFrame implements Runnable, KeyListener, MouseListener
 		g2.translate(-getCurrentScene().camera.x, -getCurrentScene().camera.y);
 		
 		
-		getCurrentScene().drawGUI(g2);
+		getCurrentScene().drawGUI(gui);
 		
 		g.drawImage(offscreen.getScaledInstance(FRAMESIZE.width, FRAMESIZE.height, 1), 0, 0, this);
 		g2.dispose();
