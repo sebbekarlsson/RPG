@@ -1,6 +1,7 @@
 package com.lucifer.main.instances;
 
 import com.lucifer.main.Item;
+import com.lucifer.main.scenes.WorldScene;
 
 public class Bottle extends Item{
 
@@ -26,6 +27,15 @@ public class Bottle extends Item{
 		}
 		
 		
+	}
+	
+	public void use(){
+		if(type == 1){
+			if(WorldScene.player.health < 100){
+				WorldScene.player.health = 100;
+				WorldScene.player.getInventory().getItems().remove(this);
+			}
+		}
 	}
 
 }

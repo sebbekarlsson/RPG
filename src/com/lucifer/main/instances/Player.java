@@ -11,7 +11,7 @@ import com.lucifer.main.scenes.WorldScene;
 public class Player extends Instance {
 
 	int speed = 2;
-	public int health = 100;
+	public int health = 50;
 	boolean collides = false;
 	Inventory inventory = new Inventory(8);
 

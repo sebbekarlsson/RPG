@@ -12,6 +12,7 @@ import com.lucifer.main.Scene;
 import com.lucifer.main.instances.Bone;
 import com.lucifer.main.instances.Bottle;
 import com.lucifer.main.instances.Chest;
+import com.lucifer.main.instances.Fish;
 import com.lucifer.main.instances.Flower;
 import com.lucifer.main.instances.Player;
 import com.lucifer.main.instances.Stone;
@@ -55,21 +56,24 @@ public class WorldScene extends Scene {
 				}
 
 				
-				Item[] chestItems = new Item[]{
-						new Bone(0,0),
-						new Bottle(0,0,0),
-						new Bottle(0,0,1),
-						new Bottle(0,0,2),
-						new Bottle(0,0,3),
-						new Stone(0,0),
-						new Flower(0,0)
-						
-				};
+			
 				
 				Chest chest = new Chest(i*32,ii*32);
-
+				
 				
 				for(int it = 0; it < MathBrain.random.nextInt(20)+1; it++){
+					Item[] chestItems = new Item[]{
+							new Bone(0,0),
+							new Bottle(0,0,0),
+							new Bottle(0,0,1),
+							new Bottle(0,0,2),
+							new Bottle(0,0,3),
+							new Stone(0,0),
+							new Flower(0,0),
+						
+							
+							
+					};
 				chest.getInventory().add(chestItems[MathBrain.random.nextInt(chestItems.length)]);
 
 				}
@@ -83,8 +87,7 @@ public class WorldScene extends Scene {
 			}
 		}
 
-		player.getInventory().add(new Bone(0,0));
-		player.getInventory().add(new Bone(0,0));
+		
 
 		this.instantiate(player);
 
