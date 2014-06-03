@@ -12,6 +12,7 @@ import com.lucifer.main.Scene;
 import com.lucifer.main.instances.Bone;
 import com.lucifer.main.instances.Bottle;
 import com.lucifer.main.instances.Chest;
+import com.lucifer.main.instances.Cookie;
 import com.lucifer.main.instances.Fish;
 import com.lucifer.main.instances.Flower;
 import com.lucifer.main.instances.Player;
@@ -70,6 +71,8 @@ public class WorldScene extends Scene {
 							new Bottle(0,0,3),
 							new Stone(0,0),
 							new Flower(0,0),
+							new Cookie(0,0),
+							new Fish(0,0)
 						
 							
 							
