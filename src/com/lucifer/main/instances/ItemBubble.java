@@ -1,19 +1,19 @@
 package com.lucifer.main.instances;
 
 import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 import com.lucifer.main.Game;
 import com.lucifer.main.Instance;
+import com.lucifer.main.Item;
 import com.lucifer.main.scenes.WorldScene;
 
 public class ItemBubble extends Instance {
 
-	public Instance item;
+	public Item item;
 	boolean up = true;
+	int popTime = 100;
 
 	int increment = 1;
 	int yatstart;
@@ -22,7 +22,7 @@ public class ItemBubble extends Instance {
 	boolean created = false;
 
 
-	public ItemBubble(int x, int y,Instance item) {
+	public ItemBubble(int x, int y,Item item) {
 		super(x, y);
 		this.setSprite("images/bubble.png");
 		yatstart = y;
@@ -30,6 +30,13 @@ public class ItemBubble extends Instance {
 	}
 
 	public void tick(){
+		
+		
+		if(popTime >0){
+			popTime -= 1;
+		}else{
+			pop();
+		}
 
 		if(created == false){
 			yatstart = y;
@@ -55,17 +62,16 @@ public class ItemBubble extends Instance {
 
 
 		Player player = WorldScene.player;
-		if(x >= player.x && x < player.x+player.sprite.getWidth(null) && y >= player.y && y <= player.y+player.sprite.getHeight(null)){
+		if(player.x+(player.getHitBox().width/2) >= x && player.x+(player.getHitBox().width/2) <= x+hitbox.width && player.y+(player.getHitBox().height/2) >= y && player.y+(player.getHitBox().height/2) <= y+hitbox.height ){
 			if(Game.vk_enter){
+				
 				if(!WorldScene.player.getInventory().isFull()){
 					WorldScene.player.getInventory().add(item);
 					Game.getCurrentScene().destroy(this);
 				}
-
 			}
-			
-			Game.vk_enter = false;
 		}
+		
 
 	}
 
@@ -81,19 +87,23 @@ public class ItemBubble extends Instance {
 
 		}
 		
-		
-		
-			
-			
-		
+
 		
 		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) 0.5));
 		drawDefaultSprite(g2);
 		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) 1));
 	}
+	
 
-	public void setItem(Instance item){
+	public void setItem(Item item){
 		this.item = item;
+	}
+	
+	public void pop(){
+		item.x = x;
+		item.y = y;
+		Game.getCurrentScene().instantiate(item);
+		Game.getCurrentScene().destroy(this);
 	}
 
 }

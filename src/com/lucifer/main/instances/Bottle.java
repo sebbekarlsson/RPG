@@ -1,8 +1,8 @@
 package com.lucifer.main.instances;
 
-import com.lucifer.main.Instance;
+import com.lucifer.main.Item;
 
-public class Bottle extends Instance{
+public class Bottle extends Item{
 
 	int type;
 

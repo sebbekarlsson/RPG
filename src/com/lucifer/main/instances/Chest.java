@@ -24,27 +24,27 @@ public class Chest extends Instance {
 
 	public void tick(){
 
-		Instance instance = WorldScene.player;
-		if(instance.x >= x && instance.x < x+sprite.getWidth(null) && instance.y > y && instance.y < y+sprite.getHeight(null)){
+		
+		Player player = WorldScene.player;
+		if(player.x+(player.getHitBox().width/2) >= x && player.x+(player.getHitBox().width/2) <= x+hitbox.width && player.y+(player.getHitBox().height/2) >= y && player.y+(player.getHitBox().height/2) <= y+hitbox.height ){
 			if(Game.vk_enter){
 				open();
 				
-				Game.vk_enter = false;
-
-			}}
+			}
+		}
 
 	}
 
 	public void draw(Graphics g){
 		
 		drawDefaultSprite(g);
-		Instance instance = WorldScene.player;
-		if(instance.x >= x && instance.x < x+sprite.getWidth(null) && instance.y > y && instance.y < y+sprite.getHeight(null)){
+		Player player = WorldScene.player;
+		if(player.x+(player.getHitBox().width/2) >= x && player.x+(player.getHitBox().width/2) <= x+hitbox.width && player.y+(player.getHitBox().height/2) >= y && player.y+(player.getHitBox().height/2) <= y+hitbox.height ){
 			if(open == false){
 				
 				g.setColor(Color.WHITE);
 				g.setFont(new Font(Font.SERIF,12,12));
-				g.drawString("[ENTER]", x-4, y-16);
+				g.drawString("[ENTER]"+" ("+this.getInventory().getItems().size()+")", x-4, y-16);
 			}else{
 				g.setColor(Color.WHITE);
 				g.setFont(new Font(Font.SERIF,12,12));
@@ -56,8 +56,8 @@ public class Chest extends Instance {
 	public void open(){
 		open = true;
 		this.setSprite("images/chest/chest_open.png");
-		for(int i = 0; i < inventory.getInstances().size(); i++){
-			ItemBubble bubble = new ItemBubble(x,y,inventory.getInstances().get(i));
+		for(int i = 0; i < inventory.getItems().size(); i++){
+			ItemBubble bubble = new ItemBubble(x,y,inventory.getItems().get(i));
 			
 			
 			bubble.x = x+MathBrain.chooseInt(MathBrain.random.nextInt(32),-MathBrain.random.nextInt(32));
@@ -65,7 +65,7 @@ public class Chest extends Instance {
 			
 			Game.getCurrentScene().instantiate(bubble);
 		}
-		this.inventory.getInstances().clear();
+		this.inventory.getItems().clear();
 	}
 	
 	public Inventory getInventory(){

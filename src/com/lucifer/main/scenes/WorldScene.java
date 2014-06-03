@@ -6,14 +6,15 @@ import java.awt.Graphics;
 
 import com.lucifer.main.Game;
 import com.lucifer.main.ImageLoader;
-import com.lucifer.main.Instance;
+import com.lucifer.main.Item;
 import com.lucifer.main.MathBrain;
 import com.lucifer.main.Scene;
+import com.lucifer.main.instances.Bone;
 import com.lucifer.main.instances.Bottle;
 import com.lucifer.main.instances.Chest;
 import com.lucifer.main.instances.Flower;
-import com.lucifer.main.instances.Mushroom;
 import com.lucifer.main.instances.Player;
+import com.lucifer.main.instances.Stone;
 import com.lucifer.main.instances.Tree;
 import com.lucifer.main.instances.tiles.GrassTile;
 
@@ -26,7 +27,7 @@ public class WorldScene extends Scene {
 
 
 		for(int i = 0; i < WIDTH/32; i++){
-			for(int ii = 0; ii < HEIGHT+32/32; ii++){
+			for(int ii = 0; ii < HEIGHT/32; ii++){
 				this.instantiate(new GrassTile(i*32,ii*32));
 
 			}
@@ -34,7 +35,7 @@ public class WorldScene extends Scene {
 
 
 		for(int i = 0; i < WIDTH/32; i++){
-			for(int ii = 0; ii < HEIGHT+32/32; ii++){
+			for(int ii = 0; ii < HEIGHT/32; ii++){
 
 				if(MathBrain.random.nextInt(100)==0){
 					this.instantiate(new Tree(i*32,ii*32));
@@ -43,15 +44,26 @@ public class WorldScene extends Scene {
 				if(MathBrain.random.nextInt(7)==0){
 					this.instantiate(new Flower(i*32,ii*32));
 				}
+				
+				
+				if(MathBrain.random.nextInt(40)==0){
+					this.instantiate(new Stone(i*32,ii*32));
+				}
+				
+				if(MathBrain.random.nextInt(90)==0){
+					this.instantiate(new Bone(i*32,ii*32));
+				}
 
 				
-				Instance[] chestItems = new Instance[]{
+				Item[] chestItems = new Item[]{
+						new Bone(0,0),
 						new Bottle(0,0,0),
 						new Bottle(0,0,1),
 						new Bottle(0,0,2),
 						new Bottle(0,0,3),
-						new Flower(0,0),
-						new Mushroom(0,0)
+						new Stone(0,0),
+						new Flower(0,0)
+						
 				};
 				
 				Chest chest = new Chest(i*32,ii*32);
@@ -71,8 +83,8 @@ public class WorldScene extends Scene {
 			}
 		}
 
-		player.getInventory().add(new Bottle(0,0,0));
-		player.getInventory().add(new Mushroom(0,0));
+		player.getInventory().add(new Bone(0,0));
+		player.getInventory().add(new Bone(0,0));
 
 		this.instantiate(player);
 
@@ -102,6 +114,7 @@ public class WorldScene extends Scene {
 		}
 	}
 
+
 	public void drawGUI(Graphics g){
 		for(int i = 0; i < 8; i++){
 			g.drawImage(ImageLoader.load("images/inventory/slot.png"), 1+16*i, Game.RENDERSIZE.height-17, null);
@@ -111,18 +124,18 @@ public class WorldScene extends Scene {
 		for(int i = 0; i < player.health/10; i++){
 			g.drawImage(ImageLoader.load("images/heart.png"), 2+17*i, 9, null);
 		}
-		if(player.getInventory().getInstances().size() > 0){
-			for(int i = 0; i < player.getInventory().getInstances().size(); i++){
+		if(player.getInventory().getItems().size() > 0){
+			for(int i = 0; i < player.getInventory().getItems().size(); i++){
 
-				g.drawImage(player.getInventory().getInstances().get(i).sprite, 1+16*i, Game.RENDERSIZE.height-17, null);
+				g.drawImage(player.getInventory().getItems().get(i).sprite, 1+16*i, Game.RENDERSIZE.height-17, null);
 				g.setColor(Color.WHITE);
 				g.setFont(new Font(Font.SERIF,12,12));
 
 			}
 
 
-			if(markerX <= player.getInventory().getInstances().size()*16){
-				g.drawString(player.getInventory().getInstances().get(markerX/16).getDisplayName(), 8, Game.RENDERSIZE.height-32);
+			if(markerX <= player.getInventory().getItems().size()*16){
+				g.drawString(player.getInventory().getItems().get(markerX/16).getDisplayName(), 8, Game.RENDERSIZE.height-32);
 			}
 
 		}

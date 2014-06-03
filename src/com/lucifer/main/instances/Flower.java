@@ -1,8 +1,8 @@
 package com.lucifer.main.instances;
 
-import com.lucifer.main.Instance;
+import com.lucifer.main.Item;
 
-public class Flower extends Instance {
+public class Flower extends Item {
 
 	public Flower(int x, int y) {
 		super(x, y);

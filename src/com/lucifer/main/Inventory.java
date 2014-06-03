@@ -5,28 +5,28 @@ import java.util.List;
 
 public class Inventory {
 
-	List<Instance> instances = new ArrayList<Instance>();
+	List<Item> items = new ArrayList<Item>();
 	public int slots = 12;
 
 	public Inventory(int slots){
 		this.slots = slots;
 	}
 
-	public void add(Instance instance){
+	public void add(Item item){
 		//if(instances.size() < slots){
 
 		if(!isFull()){
-			instances.add(instance);
+			items.add(item);
 		}
 		//}
 	}
 
-	public List<Instance> getInstances(){
-		return this.instances;
+	public List<Item> getItems(){
+		return this.items;
 	}
 
 	public boolean isFull(){
-		return instances.size() >= slots;
+		return items.size() >= slots;
 	}
 
 

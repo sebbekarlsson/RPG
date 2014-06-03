@@ -14,8 +14,8 @@ public class Instance {
 
 	public int x,y;
 	public Image sprite;
-	private String displayName;
-	Rectangle hitbox = new Rectangle();
+	private String displayName = "";
+	protected Rectangle hitbox = new Rectangle();
 
 	public Instance(int x, int y){
 		this.x = x;
@@ -28,7 +28,11 @@ public class Instance {
 	public void tick(){}
 	public void draw(Graphics g){
 		this.drawDefaultSprite(g);
+		
 	}
+	
+	
+	
 
 	protected void drawDefaultSprite(Graphics g){
 		g.drawImage(sprite, x, y, null);
@@ -61,9 +65,21 @@ public class Instance {
 				y+100 < -Game.getCurrentScene().camera.y||
 				y > -Game.getCurrentScene().camera.y+Game.RENDERSIZE.height;
 	}
+	
+	public boolean isOutSideRoom(){
+		return x < 0||
+				x > Game.getCurrentScene().getSceneSize().width||
+				y < 0||
+				y > Game.getCurrentScene().getSceneSize().height;
+	}
 
 	public void setHitBoxSize(Dimension d){
 		this.hitbox.setSize(d);
+	}
+	
+	public Rectangle getHitBox(){
+		return this.hitbox;
+		
 	}
 	
 	public void setDisplayName(String name){

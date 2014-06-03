@@ -41,6 +41,7 @@ public class Game extends JFrame implements Runnable, KeyListener, MouseListener
 	public static boolean vk_q = false;
 	public static boolean vk_e = false;
 	public static boolean vk_d = false;
+	public static boolean vk_x = false;
 
 
 	public Game(){
@@ -88,6 +89,7 @@ public class Game extends JFrame implements Runnable, KeyListener, MouseListener
 			
 			
 			tick();
+			
 
 			fps = 1000000000.0 / (System.nanoTime() - lastTime); 
             lastTime = System.nanoTime();
@@ -97,7 +99,7 @@ public class Game extends JFrame implements Runnable, KeyListener, MouseListener
            
             
 			try {
-				Thread.sleep((long) fps/100);
+				Thread.sleep((long) 1000/60);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -207,6 +209,10 @@ public class Game extends JFrame implements Runnable, KeyListener, MouseListener
 		if(e.getKeyCode() == KeyEvent.VK_D){
 			vk_d = true;
 		}
+		
+		if(e.getKeyCode() == KeyEvent.VK_X){
+			vk_x = true;
+		}
 
 	}
 
@@ -242,6 +248,10 @@ public class Game extends JFrame implements Runnable, KeyListener, MouseListener
 		
 		if(e.getKeyCode() == KeyEvent.VK_D){
 			vk_d = false;
+		}
+		
+		if(e.getKeyCode() == KeyEvent.VK_X){
+			vk_x = false;
 		}
 
 
