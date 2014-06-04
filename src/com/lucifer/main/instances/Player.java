@@ -30,35 +30,50 @@ public class Player extends Instance {
 			if(instance instanceof Obstacle){
 
 
+				if(x-(getHitBox().width/2) <= instance.x && x-(getHitBox().width/2) >= instance.x-(instance.getHitBox().width/2) && y >= instance.y && y <= instance.y+instance.getHitBox().height){
+					x -= speed;
+				}
 
+				if(x-(getHitBox().width/2) >= instance.x && x-(getHitBox().width/2) <= instance.x+(instance.getHitBox().width/2) && y >= instance.y && y <= instance.y+instance.getHitBox().height){
+					x += speed;
+				}
+
+				if(x >= instance.x && x <= instance.x+instance.getHitBox().height && y <= instance.y && y >= instance.y-(instance.getHitBox().height/2)){
+					y -= speed;
+				}
+
+				if(x >= instance.x && x <= instance.x+instance.getHitBox().height && y >= instance.y+instance.getHitBox().height && y <= instance.y+(instance.getHitBox().height+getHitBox().height/8)){
+					y += speed;
+				}
 
 
 
 			}
-
-
-			if(inventory.getItems().size() > 0 && WorldScene.markerX/16 < inventory.getItems().size()){
-
-				if(Game.vk_d){
-					Item item = inventory.getItems().get(WorldScene.markerX/16);
-
-					item.x = x;
-					item.y = y;
-					ItemBubble bubble = new ItemBubble(x,y,item);
-					Game.getCurrentScene().instantiate(bubble);
-
-					inventory.getItems().remove(WorldScene.markerX/16);
-					Game.vk_d = false;
-
-				}
-				
-				if(Game.vk_x){
-					inventory.getItems().get(WorldScene.markerX/16).use();
-					Game.vk_x = false;
-				}
-			}
-
 		}
+
+
+		if(inventory.getItems().size() > 0 && WorldScene.markerX/16 < inventory.getItems().size()){
+
+			if(Game.vk_d){
+				Item item = inventory.getItems().get(WorldScene.markerX/16);
+
+				item.x = x;
+				item.y = y;
+				ItemBubble bubble = new ItemBubble(x,y,item);
+				Game.getCurrentScene().instantiate(bubble);
+
+				inventory.getItems().remove(WorldScene.markerX/16);
+				Game.vk_d = false;
+
+			}
+
+			if(Game.vk_x){
+				inventory.getItems().get(WorldScene.markerX/16).use();
+				Game.vk_x = false;
+			}
+		}
+
+
 
 
 
