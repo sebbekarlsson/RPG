@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 
+
 import com.lucifer.main.Game;
 import com.lucifer.main.ImageLoader;
 import com.lucifer.main.Item;
@@ -15,12 +16,15 @@ import com.lucifer.main.instances.Chest;
 import com.lucifer.main.instances.Cookie;
 import com.lucifer.main.instances.Fish;
 import com.lucifer.main.instances.Flower;
+import com.lucifer.main.instances.Kiero;
 import com.lucifer.main.instances.Player;
 import com.lucifer.main.instances.Stone;
 import com.lucifer.main.instances.Tree;
 import com.lucifer.main.instances.tiles.GrassTile;
 
 public class WorldScene extends Scene {
+	Kiero kiero = new Kiero(120,400);
+	boolean created = false;
 	public static Player player = new Player(120,120);
 	public static int markerX = 1;
 	public WorldScene(int WIDTH, int HEIGHT) {
@@ -46,22 +50,27 @@ public class WorldScene extends Scene {
 				if(MathBrain.random.nextInt(7)==0){
 					this.instantiate(new Flower(i*32,ii*32));
 				}
-				
-				
+
+
 				if(MathBrain.random.nextInt(40)==0){
 					this.instantiate(new Stone(i*32,ii*32));
 				}
-				
+
 				if(MathBrain.random.nextInt(90)==0){
 					this.instantiate(new Bone(i*32,ii*32));
 				}
 
+
+				this.instantiate(kiero);
+				player.x = kiero.x + 64;
+				player.y = kiero.y;
 				
-			
-				
+
+
+
 				Chest chest = new Chest(i*32,ii*32);
-				
-				
+
+
 				for(int it = 0; it < MathBrain.random.nextInt(20)+1; it++){
 					Item[] chestItems = new Item[]{
 							new Bone(0,0),
@@ -73,11 +82,11 @@ public class WorldScene extends Scene {
 							new Flower(0,0),
 							new Cookie(0,0),
 							new Fish(0,0)
-						
-							
-							
+
+
+
 					};
-				chest.getInventory().add(chestItems[MathBrain.random.nextInt(chestItems.length)]);
+					chest.getInventory().add(chestItems[MathBrain.random.nextInt(chestItems.length)]);
 
 				}
 
@@ -90,7 +99,7 @@ public class WorldScene extends Scene {
 			}
 		}
 
-		
+
 
 		this.instantiate(player);
 
@@ -99,6 +108,13 @@ public class WorldScene extends Scene {
 
 
 	public void tick(){
+		
+		if(created == false){
+
+			kiero.talk("Hello");
+			created = true;
+		}
+		
 		camera.x = -player.x+Game.RENDERSIZE.width/2-16;
 		camera.y = -player.y+Game.RENDERSIZE.height/2-16;
 
@@ -126,7 +142,7 @@ public class WorldScene extends Scene {
 			g.drawImage(ImageLoader.load("images/inventory/slot.png"), 1+16*i, Game.RENDERSIZE.height-17, null);
 
 		}
-		
+
 		for(int i = 0; i < player.health/10; i++){
 			g.drawImage(ImageLoader.load("images/heart.png"), 2+17*i, 9, null);
 		}
@@ -148,6 +164,7 @@ public class WorldScene extends Scene {
 		g.setColor(Color.BLUE);
 		g.drawRect(markerX, Game.RENDERSIZE.height-17, 16, 16);
 		g.drawImage(ImageLoader.load("images/inventory/marker.png"), markerX, Game.RENDERSIZE.height-17, null);
+
 
 
 	}

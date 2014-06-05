@@ -7,9 +7,11 @@ import java.util.List;
 
 public class Scene {
 	
+
 	protected int WIDTH, HEIGHT;
 	
 	private static List<Instance> instances = new ArrayList<Instance>();
+	private static List<GUIObject> guiobjects = new ArrayList<GUIObject>();
 	
 	
 	protected Camera camera = new Camera();
@@ -20,11 +22,22 @@ public class Scene {
 	}
 	
 	public void tick(){}
-	public void draw(Graphics g){}
 	public void drawGUI(Graphics g){}
 	
 	public List<Instance> getInstances(){
 		return instances;
+	}
+	
+	public List<GUIObject> getGUIObjects(){
+		return guiobjects;
+	}
+	
+	public void instantiateGUIObject(GUIObject object){
+		guiobjects.add(object);
+	}
+	
+	public void destroyGUIObject(GUIObject object){
+		guiobjects.remove(object);
 	}
 	
 	public void instantiate(Instance instance){

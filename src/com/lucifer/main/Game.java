@@ -77,27 +77,27 @@ public class Game extends JFrame implements Runnable, KeyListener, MouseListener
 			}
 
 			getCurrentScene().tick();
-			
+
 		}
 	}
 
 	public void run() {
-		 long lastTime;
-		 
+		long lastTime;
+
 		while(true){
 			lastTime = System.nanoTime();
-			
-			
+
+
 			tick();
-			
+
 
 			fps = 1000000000.0 / (System.nanoTime() - lastTime); 
-            lastTime = System.nanoTime();
-			
-            
-            
-           
-            
+			lastTime = System.nanoTime();
+
+
+
+
+
 			try {
 				Thread.sleep((long) 1000/60);
 			} catch (InterruptedException e) {
@@ -119,25 +119,32 @@ public class Game extends JFrame implements Runnable, KeyListener, MouseListener
 			for(int i = 0; i < getCurrentScene().getInstances().size(); i++){
 				Instance instance = getCurrentScene().getInstances().get(i);
 
-
-
 				if(!instance.isOutSideView()){
 					instance.draw(g2);
 				}
 			}
 
 
-			getCurrentScene().draw(g2);
+
+			
+
+			g2.translate(-getCurrentScene().camera.x, -getCurrentScene().camera.y);
+
+			///////////// --- HERE GOES GUI --- ////////////
+
+			getCurrentScene().drawGUI(gui);
+
+			/*for(int i = 0; i < getCurrentScene().getGUIObjects().size(); i++){
+				GUIObject object = getCurrentScene().getGUIObjects().get(i);
+				object.tick();
+				object.draw(gui);
+
+			}*/
+
 		}
-		
-		g2.translate(-getCurrentScene().camera.x, -getCurrentScene().camera.y);
-		
-		
-		getCurrentScene().drawGUI(gui);
-		
 		g.drawImage(offscreen.getScaledInstance(FRAMESIZE.width, FRAMESIZE.height, 1), 0, 0, this);
 		g2.dispose();
-		
+
 	}
 
 
@@ -197,19 +204,19 @@ public class Game extends JFrame implements Runnable, KeyListener, MouseListener
 		if(e.getKeyCode() == KeyEvent.VK_ENTER){
 			vk_enter = true;
 		}
-		
+
 		if(e.getKeyCode() == KeyEvent.VK_Q){
 			vk_q = true;
 		}
-		
+
 		if(e.getKeyCode() == KeyEvent.VK_E){
 			vk_e = true;
 		}
-		
+
 		if(e.getKeyCode() == KeyEvent.VK_D){
 			vk_d = true;
 		}
-		
+
 		if(e.getKeyCode() == KeyEvent.VK_X){
 			vk_x = true;
 		}
@@ -237,19 +244,19 @@ public class Game extends JFrame implements Runnable, KeyListener, MouseListener
 		if(e.getKeyCode() == KeyEvent.VK_ENTER){
 			vk_enter = false;
 		}
-		
+
 		if(e.getKeyCode() == KeyEvent.VK_Q){
 			vk_q = false;
 		}
-		
+
 		if(e.getKeyCode() == KeyEvent.VK_E){
 			vk_e = false;
 		}
-		
+
 		if(e.getKeyCode() == KeyEvent.VK_D){
 			vk_d = false;
 		}
-		
+
 		if(e.getKeyCode() == KeyEvent.VK_X){
 			vk_x = false;
 		}

@@ -10,6 +10,7 @@ import com.lucifer.main.scenes.WorldScene;
 
 public class Player extends Instance {
 
+	public boolean canWalk = true;
 	int speed = 2;
 	public int health = 50;
 	boolean collides = false;
@@ -75,26 +76,28 @@ public class Player extends Instance {
 
 
 
+		if(canWalk){
 
+			if(Game.vk_up){
+				y -= speed;
+				this.setSprite("images/player/player_up.png");
+			}
 
-		if(Game.vk_up){
-			y -= speed;
-			this.setSprite("images/player/player_up.png");
-		}
+			if(Game.vk_down){
+				y += speed;
+				this.setSprite("images/player/player_down.png");
+			}
 
-		if(Game.vk_down){
-			y += speed;
-			this.setSprite("images/player/player_down.png");
-		}
+			if(Game.vk_left){
+				x -= speed;
+				this.setSprite("images/player/player_left.png");
+			}
 
-		if(Game.vk_left){
-			x -= speed;
-			this.setSprite("images/player/player_left.png");
-		}
+			if(Game.vk_right){
+				x += speed;
+				this.setSprite("images/player/player_right.png");
+			}
 
-		if(Game.vk_right){
-			x += speed;
-			this.setSprite("images/player/player_right.png");
 		}
 
 

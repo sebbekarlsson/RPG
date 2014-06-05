@@ -33,6 +33,7 @@ public class Instance {
 	
 	
 	
+	
 
 	protected void drawDefaultSprite(Graphics g){
 		g.drawImage(sprite, x, y, null);
